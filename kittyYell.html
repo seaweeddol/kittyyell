@@ -111,22 +111,15 @@
 
       function onFrame(event){
         for(var i = 0; i < cats.length; i++){
-          if(event.time < 3){
-            cats[i].scale(.9);
-            cats[i].rotate(5);
+          if(cats[i].size > (0, 0)){
+            cats[i].remove();
+            cats.splice(i, 1);
           } else {
-            cats[i].scale(1);
+            cats[i].scale(.95);
             cats[i].rotate(5);
-            cat.splice(i,1);
           }
           }
         }
-          // if(cats[i].area < 1){
-          //   cats[i].remove();
-          //   cats.splice(i, 1);
-          // }
-
-
 
       // function onFrame(event) {
       //     keyData[event.key].catImg.rotate(3, view.center);
