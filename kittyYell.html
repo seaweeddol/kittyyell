@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Kitty Yell</title>
+    <link rel="stylesheet" href="css\kittyYell.css">
+    <script src="script/paper-full.js" charset="utf-8"></script>
+    <script src="script/howler.min.js" charset="utf-8"></script>
+
+    <script type="text/paperscript" canvas="myCanvas">
+      var keyData = {
+        q: {
+          catImg: new Raster({
+              source: 'imgs/roryell1.png',
+              visible: false
+          }),
+  				sound: new Howl({
+  		  		src: ['sounds/dyingCat.mp3']
+  				})
+  			},
+        w: {
+          catImg: new Raster({
+              source: 'imgs/roryell2.png',
+              visible: false
+          }),
+  				sound: new Howl({
+  		  		src: ['sounds/kittenMeow.mp3']
+  				})
+  			},
+        e: {
+          catImg: new Raster({
+              source: 'imgs/roryell3.png',
+              visible: false
+          }),
+  				sound: new Howl({
+  		  		src: ['sounds/annoyingCatMeow.mp3']
+  				})
+  			},
+        r: {
+          catImg: new Raster({
+              source: 'imgs/roryell2.png',
+              visible: false
+          }),
+  				sound: new Howl({
+  		  		src: ['sounds/lionroar.mp3']
+  				})
+  			},
+        t: {
+          catImg: new Raster({
+              source: 'imgs/roryell4.png',
+              visible: false
+          }),
+  				sound: new Howl({
+  		  		src: ['sounds/roughCatMeow.mp3']
+  				})
+  			},
+        y: {
+          catImg: new Raster({
+              source: 'imgs/roryell5.png',
+              visible: false
+          }),
+  				sound: new Howl({
+  		  		src: ['sounds/tomCat.mp3']
+  				})
+  			},
+        a: {
+          catImg: new Raster({
+              source: 'imgs/roryell6.png',
+              visible: false
+          }),
+  				sound: new Howl({
+  		  		src: ['sounds/higherKittenMeow.mp3']
+  				})
+  			},
+        s: {
+          catImg: new Raster({
+              source: 'imgs/tikiyell1.png',
+              visible: false
+          }),
+  				sound: new Howl({
+  		  		src: ['sounds/angryCat.mp3']
+  				})
+  			},
+       d: {
+          catImg: new Raster({
+              source: 'imgs/tikiyell2.png',
+              visible: false
+          }),
+  				sound: new Howl({
+  		  		src: ['sounds/catWantsAttention.mp3']
+  				})
+  			},
+      }
+
+      var cats = [];
+
+
+      function onKeyDown(event) {
+        if(keyData[event.key]){
+          var maxPoint = new Point(view.size.width, view.size.height);
+          var randomPoint = Point.random();
+          var point = maxPoint * randomPoint;
+          keyData[event.key].catImg.bringToFront();
+          keyData[event.key].catImg.visible = true;
+          keyData[event.key].catImg.position = point;
+          var newCat = keyData[event.key].catImg;
+          keyData[event.key].sound.play();
+          cats.push(newCat);
+        }
+      }
+
+      function onFrame(event){
+        for(var i = 0; i < cats.length; i++){
+          if(event.time < 3){
+            cats[i].scale(.9);
+            cats[i].rotate(5);
+          } else {
+            cats[i].scale(1);
+            cats[i].rotate(5);
+            cat.splice(i,1);
+          }
+          }
+        }
+          // if(cats[i].area < 1){
+          //   cats[i].remove();
+          //   cats.splice(i, 1);
+          // }
+
+
+
+      // function onFrame(event) {
+      //     keyData[event.key].catImg.rotate(3, view.center);
+      // }
+
+      // function onKeyUp(event) {
+      //   if(keyData[event.key]){
+      //     // function onFrame(event){
+      //     //   keyData[event.key].catImg.visible = false;
+      //     // }
+      //     keyData[event.key].catImg.translate(Point.random());
+      //   }
+      // }
+
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas" resize></canvas>
+
+  </body>
+</html>
